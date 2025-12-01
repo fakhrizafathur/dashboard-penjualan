@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+storage/logs/*
+bootstrap/cache/*
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vscode
+.idea
+tests
+.phpunit.cache
+.php-cs-fixer.cache
