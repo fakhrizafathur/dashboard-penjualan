@@ -17,8 +17,13 @@
 /public/hot
 /public/storage
 /storage/*.key
-/storage/pail
-/vendor
+/bootstrap/cache/
+.env
+.env.backup
+.env.*.php
+.phpunit.result.cache
 Homestead.json
 Homestead.yaml
-Thumbs.db
+npm-debug.log
+yarn-error.log
+.DS_Store
