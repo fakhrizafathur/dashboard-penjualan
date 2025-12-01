@@ -1,19 +1,5 @@
-*.log
-.DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
+# Laravel Framework
 /node_modules
-/public/build
 /public/hot
 /public/storage
 /storage/*.key
@@ -21,9 +7,53 @@
 .env
 .env.backup
 .env.*.php
+.env.local
+.env.*.local
 .phpunit.result.cache
-Homestead.json
-Homestead.yaml
+.php-cs-fixer.cache
+.php-cs-fixer.php
+
+# Composer
+composer.lock
+/vendor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS
+.DS_Store
+.env.*.php
+*.log
+
+# Build & Deploy
+/dist
+/build
+.git/
+.github/
+
+# Temporary
+*.tmp
+*.temp
+/temp/
+/tmp/
+
+# NPM
 npm-debug.log
 yarn-error.log
-.DS_Store
+package-lock.json
+yarn.lock
+
+# Testing
+.phpunit.xml
+.phpunit.cache/
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
