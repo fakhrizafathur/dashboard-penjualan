@@ -21,25 +21,31 @@ RUN a2enmod rewrite headers
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy composer
+# Copy composer binary
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy application files
+# Copy project files
 COPY . .
 
-# Install PHP dependencies
+# 🔧 FIX: Pastikan storage & cache ada sebelum composer install
+RUN mkdir -p storage/framework/cache/data \
+    && mkdir -p storage/logs \
+    && mkdir -p bootstrap/cache \
+    && chmod -R 777 storage \
+    && chmod -R 777 bootstrap/cache
+
+# Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+# Fix permissions
+RUN chown -R www-data:www-data /var/www/html
 
-# Configure Apache
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+# Point Apache to public/
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' \
+    /etc/apache2/sites-available/000-default.conf
 
 # Expose port
 EXPOSE 80
 
-# Run migrations & start server
-CMD php artisan migrate --force && apache2-foreground
+# Start Apache (tanpa migrate supaya build tidak gagal)
+CMD ["apache2-foreground"]
