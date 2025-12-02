@@ -1,146 +1,113 @@
-Dashboard Penjualan – Laravel 12
+# <div align="center">📊 Dashboard Penjualan – Laravel 12</div>
 
-Aplikasi Dashboard Penjualan berbasis Laravel 12, digunakan untuk menampilkan data penjualan dalam bentuk tabel dan grafik. Aplikasi ini berjalan tanpa fitur autentikasi—pengguna langsung diarahkan ke halaman dashboard.
+<div align="center">
+Aplikasi web sederhana untuk menampilkan dashboard penjualan.  
+Dibangun menggunakan Laravel 12 dan di-*deploy* menggunakan Railway.
+</div>
 
-Aplikasi ini juga telah berhasil dideploy menggunakan Railway.
+---
 
-🚀 Instalasi Proyek Secara Lokal
+## 📦 **Instalasi Proyek Secara Lokal**
 
-Ikuti langkah berikut untuk menjalankan project di lingkungan lokal Anda.
+### 🔧 **1. Clone Repository**
 
-1. Clone Repository
-   git clone https://github.com/fakhrizafathur/dashboard-penjualan.git
-   cd dashboard-penjualan
+```bash
+git clone https://github.com/fakhrizafathur/dashboard-penjualan.git
+```
 
-2. Install Dependencies
-   composer install
+### 📁 **2. Install Dependencies**
 
-Jika menggunakan Vite atau asset build:
+```bash
+composer install
+```
 
-npm install
-npm run build
+### ⚙️ **3. Buat File Environment**
 
-3. Copy File Environment
-   cp .env.example .env
+```bash
+cp .env.example .env
+```
 
-4. Generate App Key
-   php artisan key:generate
+Sesuaikan konfigurasi database lokal:
 
-5. Konfigurasi Database
-
-Edit .env dengan data lokal Anda:
-
+```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=dashboard_penjualan
+DB_DATABASE=nama_database
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
-6. Jalankan Migrasi & Seeder
+### 🔑 **4. Generate App Key**
 
-Jika Anda menggunakan seeder:
+```bash
+php artisan key:generate
+```
 
-php artisan migrate --seed
+### 🗄️ **5. Migrasi Database**
 
-Jika tidak menggunakan seeder:
-
+```bash
 php artisan migrate
+```
 
-7. Jalankan Server Lokal
-   php artisan serve
+### ▶️ **6. Jalankan Server Lokal**
 
-Akses aplikasi melalui:
-👉 http://127.0.0.1:8000/dashboard
+```bash
+php artisan serve
+```
 
-🌐 Mengakses Aplikasi yang Telah Dideploy (Railway)
+Aplikasi lokal dapat diakses melalui:
+👉 **http://127.0.0.1:8000/dashboard**
 
-Aplikasi dapat diakses di:
+---
 
-👉 https://dashboard-penjualan-production.up.railway.app/dashboard
+## 🌐 **Akses Aplikasi yang Telah di-Hosting**
 
-Tidak ada proses login — pengguna langsung melihat dashboard.
+Aplikasi dapat diakses melalui Railway pada URL berikut:
 
-⚙️ Teknologi yang Digunakan
+### <div align="center">🔗 **https://dashboard-penjualan-production.up.railway.app/dashboard**</div>
 
-Laravel 12
+Tidak ada proses login — pengguna langsung diarahkan ke halaman **Dashboard Penjualan**.
 
-PHP 8.2
+---
 
-MySQL
+## 📂 **Struktur Proyek (Ringkas)**
 
-Apache (Docker via Railway)
+```
+project/
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── public/
+│   ├── css/
+│   └── index.php
+├── resources/
+│   └── views/
+├── routes/
+│   └── web.php
+└── ...
+```
 
-Railway Hosting
+---
 
-Composer
+## 🚀 **Deployment Menggunakan Railway**
 
-NPM (jika menggunakan asset builder)
+-   Proyek menggunakan **Dockerfile custom**
+-   ENV yang digunakan:
 
-🐳 Deployment via Docker (Opsional)
+```env
+APP_URL=https://dashboard-penjualan-production.up.railway.app
+```
 
-Aplikasi dapat dijalankan menggunakan Docker menggunakan Dockerfile berikut:
+-   Setelah deploy, lakukan migrasi dengan:
 
-FROM php:8.2-apache
+```bash
+railway run php artisan migrate --force
+```
 
-RUN apt-get update && apt-get install -y \
- git \
- curl \
- libpng-dev \
- libonig-dev \
- libxml2-dev \
- zip \
- unzip \
- default-mysql-client \
- && rm -rf /var/lib/apt/lists/\*
+---
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+## 📝 **Lisensi**
 
-RUN a2enmod rewrite headers
-
-WORKDIR /var/www/html
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-COPY . .
-
-RUN mkdir -p storage/framework/cache/data \
- && mkdir -p storage/logs \
- && mkdir -p bootstrap/cache \
- && chmod -R 777 storage \
- && chmod -R 777 bootstrap/cache
-
-RUN composer install --no-dev --optimize-autoloader
-
-RUN chown -R www-data:www-data /var/www/html
-
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
-
-EXPOSE 80
-
-CMD ["apache2-foreground"]
-
-✨ Fitur Aplikasi
-
-Menampilkan data penjualan dalam bentuk tabel
-
-Menampilkan grafik penjualan
-
-Pagination
-
-Responsive UI
-
-Tidak ada login (langsung ke dashboard)
-
-📁 Struktur Direktori (Singkat)
-app/
-bootstrap/
-config/
-database/
-public/
-resources/
-routes/
-
-📞 Kontak
-
-Jika butuh update README, dokumentasi API, atau ingin menambahkan fitur baru, beri tahu saja.
-Fathur Fakhriza
+Proyek ini bebas digunakan untuk kebutuhan belajar dan pengembangan.
